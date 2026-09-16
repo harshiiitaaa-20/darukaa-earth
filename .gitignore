@@ -1,0 +1,24 @@
+# Node / Frontend
+node_modules/
+frontend/dist/
+frontend/node_modules/
+.env
+.env.local
+
+# Python / Backend
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+backend/venv/
+backend/darukaa_earth.db
+*.sqlite
+*.sqlite3
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
