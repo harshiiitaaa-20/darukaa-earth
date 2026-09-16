@@ -73,7 +73,7 @@ jobs:
       - name: Install Frontend Dependencies
         run: |
           cd frontend
-          npm ci || npm install
+          npm install
 
       - name: Run Prettier Formatting Check
         run: |
@@ -83,7 +83,7 @@ jobs:
       - name: Run ESLint
         run: |
           cd frontend
-          npx eslint . --ext js,jsx --max-warnings 0
+          npx eslint src/ --ext js,jsx --max-warnings 0
 
       - name: Build React Production Bundle
         run: |

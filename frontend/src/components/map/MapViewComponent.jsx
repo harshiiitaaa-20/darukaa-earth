@@ -89,7 +89,10 @@ export default function MapViewComponent({ sitesGeoJSON, height = '500px', inter
   const defaultCenter = [9.0, -83.5];
 
   return (
-    <div className="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl" style={{ height }}>
+    <div
+      className="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl"
+      style={{ height }}
+    >
       <div className="absolute top-3 left-3 z-[400] bg-slate-900/80 backdrop-blur-md border border-slate-700/60 rounded-xl px-3 py-1.5 flex items-center gap-2 text-xs font-semibold text-slate-200">
         <Layers className="w-4 h-4 text-emerald-400" />
         <span>PostGIS Vector Polygon Layer ({features.length} Sites)</span>
@@ -105,7 +108,7 @@ export default function MapViewComponent({ sitesGeoJSON, height = '500px', inter
           attribution='&copy; <a href="https://www.esri.com/">Esri</a> &mdash; Satellite Imagery'
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
         />
-        
+
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png"
           opacity={0.85}
@@ -113,7 +116,12 @@ export default function MapViewComponent({ sitesGeoJSON, height = '500px', inter
 
         {features.length > 0 && (
           <>
-            <GeoJSON key={JSON.stringify(features)} data={sitesGeoJSON} style={getStyle} onEachFeature={onEachFeature} />
+            <GeoJSON
+              key={JSON.stringify(features)}
+              data={sitesGeoJSON}
+              style={getStyle}
+              onEachFeature={onEachFeature}
+            />
             <FitBounds features={features} />
           </>
         )}
