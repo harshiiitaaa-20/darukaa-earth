@@ -1,6 +1,14 @@
 import React from 'react';
 
-export default function StatCard({ title, value, unit, icon: Icon, trend, trendLabel, color = 'emerald' }) {
+export default function StatCard({
+  title,
+  value,
+  unit,
+  icon: Icon,
+  trend,
+  trendLabel,
+  color = 'emerald',
+}) {
   const colorMap = {
     emerald: {
       bg: 'bg-emerald-500/10',
@@ -51,11 +59,7 @@ export default function StatCard({ title, value, unit, icon: Icon, trend, trendL
 
       {trend !== undefined && (
         <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center gap-2 text-xs">
-          <span
-            className={`font-semibold ${
-              trend >= 0 ? 'text-emerald-400' : 'text-rose-400'
-            }`}
-          >
+          <span className={`font-semibold ${trend >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
             {trend >= 0 ? `+${trend}%` : `${trend}%`}
           </span>
           <span className="text-slate-400 text-[11px]">{trendLabel || 'vs baseline'}</span>

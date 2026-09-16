@@ -12,7 +12,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 function ProtectedLayout() {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
 
   if (loading) {
     return (
@@ -22,7 +22,6 @@ function ProtectedLayout() {
     );
   }
 
-  // Allow guest access for demo experience if token not present, or redirect to login
   return (
     <div className="min-h-screen flex flex-col bg-dark text-slate-100">
       <Navbar />

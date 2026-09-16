@@ -19,9 +19,13 @@ export default function MapViewPage() {
         </div>
 
         <div className="flex items-center gap-3 bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl text-xs">
-          <span className="text-slate-400">Total Plots: <strong className="text-white">{totalSites}</strong></span>
+          <span className="text-slate-400">
+            Total Plots: <strong className="text-white">{totalSites}</strong>
+          </span>
           <span className="h-3 w-px bg-slate-800" />
-          <span className="text-slate-400">Coverage: <strong className="text-emerald-400">{totalAreaHectares} Ha</strong></span>
+          <span className="text-slate-400">
+            Coverage: <strong className="text-emerald-400">{totalAreaHectares} Ha</strong>
+          </span>
         </div>
       </div>
 

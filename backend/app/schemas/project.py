@@ -1,11 +1,11 @@
 from datetime import datetime
-from typing import Optional
-from pydantic import BaseModel, Field, ConfigDict
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ProjectBase(BaseModel):
     name: str = Field(..., min_length=3, max_length=255)
-    description: Optional[str] = None
+    description: str | None = None
     project_type: str = Field(...)
     country: str = Field(...)
     target_carbon_offset: float = Field(0.0, ge=0.0, description="Target carbon offset in tCO2e")
@@ -17,17 +17,17 @@ class ProjectCreate(ProjectBase):
 
 
 class ProjectUpdate(BaseModel):
-    name: Optional[str] = None
-    description: Optional[str] = None
-    project_type: Optional[str] = None
-    country: Optional[str] = None
-    target_carbon_offset: Optional[float] = None
-    status: Optional[str] = None
+    name: str | None = None
+    description: str | None = None
+    project_type: str | None = None
+    country: str | None = None
+    target_carbon_offset: float | None = None
+    status: str | None = None
 
 
 class ProjectResponse(ProjectBase):
     id: int
-    created_by_id: Optional[int] = None
+    created_by_id: int | None = None
     created_at: datetime
     updated_at: datetime
     site_count: int = 0

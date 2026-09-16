@@ -1,0 +1,20 @@
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+ignore = [
+    "B008",   # Do not perform function call `Depends` in argument defaults (FastAPI standard)
+    "B904",   # Raise from None
+    "BLE001", # Do not catch blind exception
+    "DTZ011", # datetime.date.today() used
+    "E501",   # Line too long
+]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # Pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "UP", # pyupgrade
+]

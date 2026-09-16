@@ -1,6 +1,8 @@
-from datetime import datetime, timezone
-from sqlalchemy import Column, Integer, String, Float, Text, ForeignKey, DateTime, Date
+from datetime import UTC, datetime
+
+from sqlalchemy import Column, Date, DateTime, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
+
 from app.core.database import Base
 
 
@@ -12,7 +14,7 @@ class User(Base):
     full_name = Column(String(255), nullable=False)
     hashed_password = Column(String(255), nullable=False)
     role = Column(String(50), default="admin")
-    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
 
     projects = relationship("Project", back_populates="created_by", cascade="all, delete-orphan")
 
@@ -28,8 +30,8 @@ class Project(Base):
     target_carbon_offset = Column(Float, default=0.0)  # in tCO2e
     status = Column(String(50), default="active")       # active, draft, verified
     created_by_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
-    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
-    updated_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
+    updated_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC))
 
     created_by = relationship("User", back_populates="projects")
     sites = relationship("Site", back_populates="project", cascade="all, delete-orphan")
@@ -44,7 +46,7 @@ class Site(Base):
     description = Column(Text, nullable=True)
     area_hectares = Column(Float, nullable=False, default=0.0)
     geometry_json = Column(Text, nullable=False)  # GeoJSON Polygon string representation
-    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
 
     project = relationship("Project", back_populates="sites")
     metrics = relationship("SiteMetric", back_populates="site", cascade="all, delete-orphan", order_by="SiteMetric.recorded_at.asc()")

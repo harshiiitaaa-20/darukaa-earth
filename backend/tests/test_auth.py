@@ -1,17 +1,21 @@
+import uuid
+
+
 def test_register_and_login(client):
     # Test Register
+    unique_email = f"user_{uuid.uuid4().hex[:8]}@darukaa.earth"
     reg_payload = {
-        "email": "newuser@darukaa.earth",
+        "email": unique_email,
         "password": "Password123!",
         "full_name": "New Scientist"
     }
     res_reg = client.post("/api/v1/auth/register", json=reg_payload)
     assert res_reg.status_code == 201
-    assert res_reg.json()["email"] == "newuser@darukaa.earth"
+    assert res_reg.json()["email"] == unique_email
 
     # Test Login
     login_payload = {
-        "email": "newuser@darukaa.earth",
+        "email": unique_email,
         "password": "Password123!"
     }
     res_login = client.post("/api/v1/auth/login", json=login_payload)

@@ -37,12 +37,16 @@ export default function Navbar() {
       <div className="hidden md:flex items-center gap-4 bg-slate-950/80 border border-slate-800 px-4 py-1.5 rounded-full">
         <div className="flex items-center gap-2 text-xs text-slate-300">
           <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-          <span><strong className="text-white">{totalProjects}</strong> Projects Active</span>
+          <span>
+            <strong className="text-white">{totalProjects}</strong> Projects Active
+          </span>
         </div>
         <div className="h-3 w-px bg-slate-800" />
         <div className="flex items-center gap-2 text-xs text-slate-300">
           <Globe className="w-3.5 h-3.5 text-cyan-400" />
-          <span><strong className="text-white">{totalSites}</strong> Sites Mapped</span>
+          <span>
+            <strong className="text-white">{totalSites}</strong> Sites Mapped
+          </span>
         </div>
       </div>
 

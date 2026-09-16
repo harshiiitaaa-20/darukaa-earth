@@ -1,6 +1,5 @@
 import os
-from typing import List, Union
-from pydantic import AnyHttpUrl, validator
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -8,20 +7,20 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "Darukaa.Earth Geospatial Analytics Platform"
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
-    
+
     # JWT Security Settings
     SECRET_KEY: str = os.getenv("SECRET_KEY", "darukaa_earth_super_secret_jwt_key_2026_hackathon")
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
-    
+
     # Database Settings - PostgreSQL + PostGIS (with SQLite fallback for isolated zero-config testing)
     DATABASE_URL: str = os.getenv(
-        "DATABASE_URL", 
+        "DATABASE_URL",
         "sqlite:///./darukaa_earth.db"
     )
-    
+
     # CORS Origins
-    CORS_ORIGINS: List[str] = [
+    CORS_ORIGINS: list[str] = [
         "http://localhost:3000",
         "http://localhost:5173",
         "http://127.0.0.1:3000",

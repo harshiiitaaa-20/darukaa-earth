@@ -1,11 +1,12 @@
 from datetime import datetime
-from typing import Optional, Dict, Any, List
-from pydantic import BaseModel, Field, field_validator, ConfigDict
+from typing import Any
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class GeoJSONPolygon(BaseModel):
     type: str = "Polygon"
-    coordinates: List[List[List[float]]] = Field(
+    coordinates: list[list[list[float]]] = Field(
         ...,
         description="Coordinates of polygon ring [[ [lng, lat], [lng, lat], ... ]]"
     )
@@ -31,17 +32,17 @@ class GeoJSONPolygon(BaseModel):
 
 class SiteCreate(BaseModel):
     name: str = Field(..., min_length=2, max_length=255)
-    description: Optional[str] = None
-    geometry: Dict[str, Any] = Field(..., description="GeoJSON Polygon geometry object")
+    description: str | None = None
+    geometry: dict[str, Any] = Field(..., description="GeoJSON Polygon geometry object")
 
 
 class SiteResponse(BaseModel):
     id: int
     project_id: int
     name: str
-    description: Optional[str] = None
+    description: str | None = None
     area_hectares: float
-    geometry: Dict[str, Any]
+    geometry: dict[str, Any]
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
@@ -58,10 +59,10 @@ class FeatureProperties(BaseModel):
 class GeoJSONFeature(BaseModel):
     type: str = "Feature"
     id: int
-    geometry: Dict[str, Any]
+    geometry: dict[str, Any]
     properties: FeatureProperties
 
 
 class GeoJSONFeatureCollection(BaseModel):
     type: str = "FeatureCollection"
-    features: List[GeoJSONFeature]
+    features: list[GeoJSONFeature]

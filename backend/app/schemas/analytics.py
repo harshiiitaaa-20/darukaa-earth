@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Optional
+
 from pydantic import BaseModel, ConfigDict
 
 
@@ -32,4 +32,4 @@ class SiteAnalyticsResponse(BaseModel):
     project_name: str
     area_hectares: float
     summary: AnalyticsSummary
-    metrics: List[MetricPoint]
+    metrics: list[MetricPoint]

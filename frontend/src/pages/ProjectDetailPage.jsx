@@ -3,7 +3,16 @@ import { useParams, Link } from 'react-router-dom';
 import { projectAPI, siteAPI } from '../services/api';
 import MapViewComponent from '../components/map/MapViewComponent';
 import PolygonDrawerModal from '../components/map/PolygonDrawerModal';
-import { MapPin, Plus, ArrowLeft, Globe, TreeDeciduous, Calendar, Activity, Trash2 } from 'lucide-react';
+import {
+  MapPin,
+  Plus,
+  ArrowLeft,
+  Globe,
+  TreeDeciduous,
+  Calendar,
+  Activity,
+  Trash2,
+} from 'lucide-react';
 
 export default function ProjectDetailPage() {
   const { id } = useParams();
@@ -46,8 +55,14 @@ export default function ProjectDetailPage() {
     }
   };
 
-  if (loading) return <div className="text-center py-16 text-slate-400">Loading project detail...</div>;
-  if (error || !project) return <div className="p-8 text-rose-400 glass-card text-center">{error || 'Project not found.'}</div>;
+  if (loading)
+    return <div className="text-center py-16 text-slate-400">Loading project detail...</div>;
+  if (error || !project)
+    return (
+      <div className="p-8 text-rose-400 glass-card text-center">
+        {error || 'Project not found.'}
+      </div>
+    );
 
   // Build GeoJSON FeatureCollection for project sites
   const projectSitesGeoJSON = {
@@ -69,7 +84,10 @@ export default function ProjectDetailPage() {
   return (
     <div className="space-y-6">
       {/* Back Link */}
-      <Link to="/projects" className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-emerald-400 transition-colors">
+      <Link
+        to="/projects"
+        className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-emerald-400 transition-colors"
+      >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Projects</span>
       </Link>
@@ -84,12 +102,17 @@ export default function ProjectDetailPage() {
               {project.country}
             </span>
           </div>
-          <h1 className="font-display font-extrabold text-2xl lg:text-3xl text-white">{project.name}</h1>
+          <h1 className="font-display font-extrabold text-2xl lg:text-3xl text-white">
+            {project.name}
+          </h1>
           <p className="text-sm text-slate-400 max-w-3xl">{project.description}</p>
         </div>
 
         {/* Action Button to Add Site */}
-        <button onClick={() => setIsDrawerOpen(true)} className="btn-primary text-xs shrink-0 self-start md:self-auto">
+        <button
+          onClick={() => setIsDrawerOpen(true)}
+          className="btn-primary text-xs shrink-0 self-start md:self-auto"
+        >
           <Plus className="w-4 h-4" />
           <span>Draw & Add Site Polygon</span>
         </button>
@@ -102,7 +125,9 @@ export default function ProjectDetailPage() {
             <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
               Project Spatial Boundaries
             </span>
-            <h3 className="font-display font-bold text-lg text-white">Sites Mapped ({sites.length})</h3>
+            <h3 className="font-display font-bold text-lg text-white">
+              Sites Mapped ({sites.length})
+            </h3>
           </div>
         </div>
 
@@ -116,7 +141,10 @@ export default function ProjectDetailPage() {
         {sites.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {sites.map((site) => (
-              <div key={site.id} className="glass-card p-5 space-y-3 hover:border-emerald-500/30 transition-all">
+              <div
+                key={site.id}
+                className="glass-card p-5 space-y-3 hover:border-emerald-500/30 transition-all"
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold text-emerald-400 uppercase tracking-widest">
                     Plot #{site.id}
@@ -131,14 +159,13 @@ export default function ProjectDetailPage() {
                 </div>
 
                 <h4 className="font-display font-bold text-base text-white">{site.name}</h4>
-                <p className="text-xs text-slate-400 line-clamp-2">{site.description || 'Geospatial carbon sequestration site plot.'}</p>
+                <p className="text-xs text-slate-400 line-clamp-2">
+                  {site.description || 'Geospatial carbon sequestration site plot.'}
+                </p>
 
                 <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
                   <span className="font-bold text-emerald-400">{site.area_hectares} Hectares</span>
-                  <Link
-                    to={`/sites/${site.id}`}
-                    className="btn-primary py-1 px-3 text-[11px]"
-                  >
+                  <Link to={`/sites/${site.id}`} className="btn-primary py-1 px-3 text-[11px]">
                     <span>View Analytics</span>
                     <Activity className="w-3 h-3" />
                   </Link>

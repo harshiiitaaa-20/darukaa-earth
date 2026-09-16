@@ -1,9 +1,11 @@
 import json
 import math
 from datetime import date, timedelta
+
 from sqlalchemy.orm import Session
+
 from app.core.security import get_password_hash
-from app.db.models import User, Project, Site, SiteMetric
+from app.db.models import Project, Site, SiteMetric, User
 
 
 def seed_metrics_for_site(db: Session, site_id: int, months: int = 36):

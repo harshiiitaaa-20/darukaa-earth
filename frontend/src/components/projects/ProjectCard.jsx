@@ -41,12 +41,18 @@ export default function ProjectCard({ project }) {
       <div className="space-y-4 pt-4 border-t border-slate-800/80">
         <div className="grid grid-cols-2 gap-2 text-xs">
           <div className="bg-slate-950/50 p-2.5 rounded-xl border border-slate-800">
-            <span className="text-[10px] text-slate-400 block uppercase font-semibold mb-0.5">Target Offset</span>
-            <span className="font-bold text-slate-200">{project.target_carbon_offset?.toLocaleString()} tCO2e</span>
+            <span className="text-[10px] text-slate-400 block uppercase font-semibold mb-0.5">
+              Target Offset
+            </span>
+            <span className="font-bold text-slate-200">
+              {project.target_carbon_offset?.toLocaleString()} tCO2e
+            </span>
           </div>
 
           <div className="bg-slate-950/50 p-2.5 rounded-xl border border-slate-800">
-            <span className="text-[10px] text-slate-400 block uppercase font-semibold mb-0.5">Sites / Area</span>
+            <span className="text-[10px] text-slate-400 block uppercase font-semibold mb-0.5">
+              Sites / Area
+            </span>
             <span className="font-bold text-emerald-400">
               {project.site_count} Sites ({project.total_area_hectares} Ha)
             </span>

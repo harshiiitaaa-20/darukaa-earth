@@ -1,28 +1,29 @@
-from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, status, Query
-from sqlalchemy.orm import Session
+
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import func
-from app.api.deps import get_db, get_current_user, get_optional_user
+from sqlalchemy.orm import Session
+
+from app.api.deps import get_current_user, get_db
 from app.db.models import Project, Site, User
-from app.schemas.project import ProjectCreate, ProjectUpdate, ProjectResponse
+from app.schemas.project import ProjectCreate, ProjectResponse, ProjectUpdate
 
 router = APIRouter(prefix="/projects", tags=["Projects"])
 
 
-@router.get("", response_model=List[ProjectResponse])
+@router.get("", response_model=list[ProjectResponse])
 def list_projects(
-    search: Optional[str] = Query(None, description="Search by project name or country"),
-    project_type: Optional[str] = Query(None, description="Filter by project type"),
-    status_filter: Optional[str] = Query(None, alias="status", description="Filter by status"),
+    search: str | None = Query(None, description="Search by project name or country"),
+    project_type: str | None = Query(None, description="Filter by project type"),
+    status_filter: str | None = Query(None, alias="status", description="Filter by status"),
     db: Session = Depends(get_db)
 ):
     """Retrieve all projects with site count and spatial area summary."""
     query = db.query(Project)
-    
+
     if search:
         search_pattern = f"%{search}%"
         query = query.filter(
-            (Project.name.ilike(search_pattern)) | 
+            (Project.name.ilike(search_pattern)) |
             (Project.country.ilike(search_pattern)) |
             (Project.description.ilike(search_pattern))
         )
@@ -30,14 +31,14 @@ def list_projects(
         query = query.filter(Project.project_type == project_type)
     if status_filter:
         query = query.filter(Project.status == status_filter)
-        
+
     projects = query.order_by(Project.created_at.desc()).all()
-    
+
     result = []
     for proj in projects:
         site_count = db.query(func.count(Site.id)).filter(Site.project_id == proj.id).scalar() or 0
         total_area = db.query(func.sum(Site.area_hectares)).filter(Site.project_id == proj.id).scalar() or 0.0
-        
+
         proj_dict = ProjectResponse(
             id=proj.id,
             name=proj.name,
@@ -75,7 +76,7 @@ def create_project(
     db.add(project)
     db.commit()
     db.refresh(project)
-    
+
     return ProjectResponse(
         id=project.id,
         name=project.name,
@@ -101,10 +102,10 @@ def get_project(project_id: int, db: Session = Depends(get_db)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Project with ID {project_id} not found."
         )
-    
+
     site_count = db.query(func.count(Site.id)).filter(Site.project_id == project.id).scalar() or 0
     total_area = db.query(func.sum(Site.area_hectares)).filter(Site.project_id == project.id).scalar() or 0.0
-    
+
     return ProjectResponse(
         id=project.id,
         name=project.name,
@@ -135,17 +136,17 @@ def update_project(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Project with ID {project_id} not found."
         )
-    
+
     update_data = project_in.dict(exclude_unset=True)
     for field, value in update_data.items():
         setattr(project, field, value)
-    
+
     db.commit()
     db.refresh(project)
-    
+
     site_count = db.query(func.count(Site.id)).filter(Site.project_id == project.id).scalar() or 0
     total_area = db.query(func.sum(Site.area_hectares)).filter(Site.project_id == project.id).scalar() or 0.0
-    
+
     return ProjectResponse(
         id=project.id,
         name=project.name,
@@ -177,4 +178,3 @@ def delete_project(
         )
     db.delete(project)
     db.commit()
-    return None

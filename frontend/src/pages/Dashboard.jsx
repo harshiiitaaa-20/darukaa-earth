@@ -40,7 +40,10 @@ export default function Dashboard() {
           </p>
         </div>
 
-        <button onClick={() => setIsCreateModalOpen(true)} className="btn-primary text-xs self-start md:self-auto">
+        <button
+          onClick={() => setIsCreateModalOpen(true)}
+          className="btn-primary text-xs self-start md:self-auto"
+        >
           <Plus className="w-4 h-4" />
           <span>New Project</span>
         </button>
@@ -91,7 +94,9 @@ export default function Dashboard() {
             <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
               Spatial Intelligence Map
             </span>
-            <h3 className="font-display font-bold text-lg text-white">Global Project & Site Polygons</h3>
+            <h3 className="font-display font-bold text-lg text-white">
+              Global Project & Site Polygons
+            </h3>
           </div>
           <Link to="/map" className="btn-secondary text-xs">
             <span>Expand Full Map</span>
@@ -106,10 +111,17 @@ export default function Dashboard() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-display font-bold text-xl text-white">Active Conservation Projects</h3>
-            <p className="text-xs text-slate-400">Select a project to add polygon site plots & inspect metrics.</p>
+            <h3 className="font-display font-bold text-xl text-white">
+              Active Conservation Projects
+            </h3>
+            <p className="text-xs text-slate-400">
+              Select a project to add polygon site plots & inspect metrics.
+            </p>
           </div>
-          <Link to="/projects" className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
+          <Link
+            to="/projects"
+            className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1"
+          >
             View All ({projects.length}) &rarr;
           </Link>
         </div>

@@ -4,9 +4,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from app.main import app
 from app.core.database import Base, get_db
 from app.db.seed import seed_initial_demo_data
+from app.main import app
 
 # In-memory SQLite DB for fast unit tests
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"

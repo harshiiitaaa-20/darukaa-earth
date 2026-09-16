@@ -52,7 +52,9 @@ export default function Login() {
         <div className="glass-card p-8 space-y-6">
           <div className="space-y-1 text-center">
             <h2 className="font-display font-bold text-xl text-white">Administrator Sign In</h2>
-            <p className="text-xs text-slate-400">Enter your credentials to access spatial project controls.</p>
+            <p className="text-xs text-slate-400">
+              Enter your credentials to access spatial project controls.
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -94,7 +96,11 @@ export default function Login() {
               </div>
             )}
 
-            <button type="submit" disabled={loading} className="btn-primary w-full justify-center text-sm py-2.5 shadow-lg shadow-emerald-500/20">
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-primary w-full justify-center text-sm py-2.5 shadow-lg shadow-emerald-500/20"
+            >
               <span>{loading ? 'Authenticating...' : 'Sign In to Dashboard'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>

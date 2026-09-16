@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from app.api.deps import get_db, get_current_user
-from app.core.security import get_password_hash, verify_password, create_access_token
+
+from app.api.deps import get_current_user, get_db
+from app.core.security import create_access_token, get_password_hash, verify_password
 from app.db.models import User
-from app.schemas.auth import UserRegister, UserLogin, Token, UserResponse
+from app.schemas.auth import Token, UserLogin, UserRegister, UserResponse
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -18,7 +18,7 @@ def register_user(user_in: UserRegister, db: Session = Depends(get_db)):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="User with this email already exists."
         )
-    
+
     hashed_pwd = get_password_hash(user_in.password)
     user = User(
         email=user_in.email,
@@ -42,7 +42,7 @@ def login_user(user_in: UserLogin, db: Session = Depends(get_db)):
             detail="Incorrect email or password.",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     token = create_access_token(subject=user.id)
     return {"access_token": token, "token_type": "bearer"}
 

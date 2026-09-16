@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Map, FolderTree, Activity, Database } from 'lucide-react';
+import { LayoutDashboard, Map, FolderTree, Activity } from 'lucide-react';
 
 export default function Sidebar() {
   const navItems = [
@@ -38,7 +38,6 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {/* System Status Banner */}
       <div className="p-4 border-t border-slate-800/60">
         <div className="glass-card p-3 rounded-xl bg-slate-950/40">
           <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 mb-1">

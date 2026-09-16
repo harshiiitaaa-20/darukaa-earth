@@ -101,7 +101,11 @@ export default function Register() {
               </div>
             )}
 
-            <button type="submit" disabled={loading} className="btn-primary w-full justify-center text-sm py-2.5">
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-primary w-full justify-center text-sm py-2.5"
+            >
               <span>{loading ? 'Creating Account...' : 'Register Account'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>

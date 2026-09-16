@@ -1,7 +1,9 @@
-from typing import Generator, Optional
+from collections.abc import Generator
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
+
 from app.core.database import SessionLocal
 from app.core.security import decode_access_token
 from app.db.models import User
@@ -19,7 +21,7 @@ def get_db() -> Generator:
 
 def get_current_user(
     db: Session = Depends(get_db),
-    token: Optional[str] = Depends(oauth2_scheme)
+    token: str | None = Depends(oauth2_scheme)
 ) -> User:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -28,11 +30,11 @@ def get_current_user(
     )
     if not token:
         raise credentials_exception
-    
+
     user_id_str = decode_access_token(token)
     if not user_id_str:
         raise credentials_exception
-    
+
     try:
         user_id = int(user_id_str)
     except ValueError:
@@ -46,8 +48,8 @@ def get_current_user(
 
 def get_optional_user(
     db: Session = Depends(get_db),
-    token: Optional[str] = Depends(oauth2_scheme)
-) -> Optional[User]:
+    token: str | None = Depends(oauth2_scheme)
+) -> User | None:
     if not token:
         return None
     user_id_str = decode_access_token(token)

@@ -1,11 +1,12 @@
 from datetime import date, timedelta
-from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, status, Query
+
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
+
 from app.api.deps import get_db
 from app.db.models import Site, SiteMetric
-from app.schemas.analytics import SiteAnalyticsResponse, AnalyticsSummary, MetricPoint
 from app.db.seed import seed_metrics_for_site
+from app.schemas.analytics import AnalyticsSummary, MetricPoint, SiteAnalyticsResponse
 
 router = APIRouter(prefix="/sites", tags=["Analytics"])
 

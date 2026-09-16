@@ -4,7 +4,16 @@ import { analyticsAPI, siteAPI } from '../services/api';
 import TimeSeriesChart from '../components/analytics/TimeSeriesChart';
 import MapViewComponent from '../components/map/MapViewComponent';
 import StatCard from '../components/common/StatCard';
-import { ArrowLeft, Activity, TreeDeciduous, ShieldCheck, Database, Calendar, Download, RefreshCw } from 'lucide-react';
+import {
+  ArrowLeft,
+  Activity,
+  TreeDeciduous,
+  ShieldCheck,
+  Database,
+  Calendar,
+  Download,
+  RefreshCw,
+} from 'lucide-react';
 
 export default function SiteDetailPage() {
   const { id } = useParams();
@@ -37,7 +46,9 @@ export default function SiteDetailPage() {
   }, [fetchAnalytics]);
 
   if (loading && !analyticsData) {
-    return <div className="text-center py-16 text-slate-400">Loading site analytics & telemetry...</div>;
+    return (
+      <div className="text-center py-16 text-slate-400">Loading site analytics & telemetry...</div>
+    );
   }
 
   if (error || !analyticsData) {
@@ -96,7 +107,9 @@ export default function SiteDetailPage() {
             {analyticsData.site_name}
           </h1>
           <p className="text-sm text-slate-400 mt-1">
-            Spatial Area: <strong className="text-emerald-400">{analyticsData.area_hectares} Hectares</strong> | Project: {analyticsData.project_name}
+            Spatial Area:{' '}
+            <strong className="text-emerald-400">{analyticsData.area_hectares} Hectares</strong> |
+            Project: {analyticsData.project_name}
           </p>
         </div>
 
@@ -186,16 +199,23 @@ export default function SiteDetailPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60 text-slate-300 font-mono">
-                {metrics.slice().reverse().map((m, idx) => (
-                  <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
-                    <td className="py-2 px-3 text-slate-400 font-sans">{m.recorded_at}</td>
-                    <td className="py-2 px-3 text-cyan-400 font-bold">{m.ndvi}</td>
-                    <td className="py-2 px-3 text-amber-400">{m.canopy_cover_pct}%</td>
-                    <td className="py-2 px-3 text-emerald-400 font-bold">{m.carbon_sequestered_tco2}</td>
-                    <td className="py-2 px-3">{m.soil_organic_carbon}</td>
-                    <td className="py-2 px-3 text-purple-400 font-bold">{m.biodiversity_index}</td>
-                  </tr>
-                ))}
+                {metrics
+                  .slice()
+                  .reverse()
+                  .map((m, idx) => (
+                    <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="py-2 px-3 text-slate-400 font-sans">{m.recorded_at}</td>
+                      <td className="py-2 px-3 text-cyan-400 font-bold">{m.ndvi}</td>
+                      <td className="py-2 px-3 text-amber-400">{m.canopy_cover_pct}%</td>
+                      <td className="py-2 px-3 text-emerald-400 font-bold">
+                        {m.carbon_sequestered_tco2}
+                      </td>
+                      <td className="py-2 px-3">{m.soil_organic_carbon}</td>
+                      <td className="py-2 px-3 text-purple-400 font-bold">
+                        {m.biodiversity_index}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

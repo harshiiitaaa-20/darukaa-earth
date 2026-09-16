@@ -1,12 +1,19 @@
 import json
-from typing import List, Optional
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from app.api.deps import get_db, get_current_user
+
+from app.api.deps import get_current_user, get_db
 from app.db.models import Project, Site, User
-from app.schemas.site import SiteCreate, SiteResponse, GeoJSONFeatureCollection, GeoJSONFeature, FeatureProperties
-from app.services.spatial import calculate_polygon_area_hectares, parse_geometry_to_json
 from app.db.seed import seed_metrics_for_site
+from app.schemas.site import (
+    FeatureProperties,
+    GeoJSONFeature,
+    GeoJSONFeatureCollection,
+    SiteCreate,
+    SiteResponse,
+)
+from app.services.spatial import calculate_polygon_area_hectares, parse_geometry_to_json
 
 router = APIRouter(tags=["Sites"])
 
@@ -16,11 +23,11 @@ def list_all_sites_geojson(db: Session = Depends(get_db)):
     """Return all sites across all projects as a GeoJSON FeatureCollection for Mapbox GL JS."""
     sites = db.query(Site).all()
     features = []
-    
+
     for s in sites:
         geom_dict = parse_geometry_to_json(s.geometry_json)
         proj_name = s.project.name if s.project else "Unknown Project"
-        
+
         feature = GeoJSONFeature(
             type="Feature",
             id=s.id,
@@ -34,11 +41,11 @@ def list_all_sites_geojson(db: Session = Depends(get_db)):
             )
         )
         features.append(feature)
-        
+
     return GeoJSONFeatureCollection(type="FeatureCollection", features=features)
 
 
-@router.get("/projects/{project_id}/sites", response_model=List[SiteResponse])
+@router.get("/projects/{project_id}/sites", response_model=list[SiteResponse])
 def get_project_sites(project_id: int, db: Session = Depends(get_db)):
     """Get all sites for a specific project."""
     project = db.query(Project).filter(Project.id == project_id).first()
@@ -47,7 +54,7 @@ def get_project_sites(project_id: int, db: Session = Depends(get_db)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Project with ID {project_id} not found."
         )
-        
+
     sites = db.query(Site).filter(Site.project_id == project_id).all()
     result = []
     for s in sites:
@@ -144,4 +151,3 @@ def delete_site(
         )
     db.delete(site)
     db.commit()
-    return None

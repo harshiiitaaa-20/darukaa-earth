@@ -23,7 +23,9 @@ button {
 
 .glass-card:hover {
   border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 12px 35px -5px rgba(16, 185, 129, 0.1), 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 12px 35px -5px rgba(16, 185, 129, 0.1),
+    0 10px 30px -5px rgba(0, 0, 0, 0.5);
 }
 
 /* Inputs */
@@ -43,7 +45,9 @@ button {
 }
 
 /* Fix for inputs with left icons */
-.glass-input.pl-9, .glass-input.pl-10, input.glass-input-has-icon {
+.glass-input.pl-9,
+.glass-input.pl-10,
+input.glass-input-has-icon {
   padding-left: 2.6rem !important;
 }
 

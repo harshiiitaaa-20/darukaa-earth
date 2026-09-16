@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import { ExternalLink, Layers, Sparkles } from 'lucide-react';
+import { Layers } from 'lucide-react';
 
-// Subcomponent to fit bounds around features
 function FitBounds({ features }) {
   const map = useMap();
   useEffect(() => {
@@ -27,7 +26,6 @@ export default function MapViewComponent({ sitesGeoJSON, height = '500px', inter
   const navigate = useNavigate();
   const features = sitesGeoJSON?.features || [];
 
-  // Polygon styling based on project type / ID
   const getStyle = (feature) => {
     const id = feature?.properties?.id || 1;
     const colors = ['#10b981', '#06b6d4', '#f59e0b', '#8b5cf6', '#ec4899'];
@@ -88,11 +86,10 @@ export default function MapViewComponent({ sitesGeoJSON, height = '500px', inter
     });
   };
 
-  const defaultCenter = [9.0, -83.5]; // Central Costa Rica / global fallback
+  const defaultCenter = [9.0, -83.5];
 
   return (
     <div className="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl" style={{ height }}>
-      {/* Map Control Overlay Header */}
       <div className="absolute top-3 left-3 z-[400] bg-slate-900/80 backdrop-blur-md border border-slate-700/60 rounded-xl px-3 py-1.5 flex items-center gap-2 text-xs font-semibold text-slate-200">
         <Layers className="w-4 h-4 text-emerald-400" />
         <span>PostGIS Vector Polygon Layer ({features.length} Sites)</span>
@@ -104,13 +101,11 @@ export default function MapViewComponent({ sitesGeoJSON, height = '500px', inter
         style={{ width: '100%', height: '100%', background: '#090e17' }}
         zoomControl={interactive}
       >
-        {/* Esri World Imagery / Dark Canvas Basemap */}
         <TileLayer
           attribution='&copy; <a href="https://www.esri.com/">Esri</a> &mdash; Satellite Imagery'
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
         />
         
-        {/* Dark Overlay for Sleek Contrast */}
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png"
           opacity={0.85}

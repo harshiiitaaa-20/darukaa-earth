@@ -13,7 +13,13 @@ function PolygonClickDrawer({ points, setPoints }) {
   return null;
 }
 
-export default function PolygonDrawerModal({ projectId, projectName, isOpen, onClose, onSiteCreated }) {
+export default function PolygonDrawerModal({
+  projectId,
+  projectName,
+  isOpen,
+  onClose,
+  onSiteCreated,
+}) {
   const [siteName, setSiteName] = useState('');
   const [description, setDescription] = useState('');
   const [points, setPoints] = useState([]); // List of [lat, lng]
@@ -92,9 +98,7 @@ export default function PolygonDrawerModal({ projectId, projectName, isOpen, onC
         <form onSubmit={handleSaveSite} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
-                Site Name *
-              </label>
+              <label className="block text-xs font-semibold text-slate-300 mb-1">Site Name *</label>
               <input
                 type="text"
                 required
@@ -136,13 +140,11 @@ export default function PolygonDrawerModal({ projectId, projectName, isOpen, onC
             )}
 
             <MapContainer
-              center={[8.52, -83.50]}
+              center={[8.52, -83.5]}
               zoom={11}
               style={{ width: '100%', height: '100%', background: '#090e17' }}
             >
-              <TileLayer
-                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-              />
+              <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
               <TileLayer
                 url="https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png"
                 opacity={0.8}
@@ -168,22 +170,33 @@ export default function PolygonDrawerModal({ projectId, projectName, isOpen, onC
             <div className="flex items-center gap-2 text-xs text-slate-300">
               <Info className="w-4 h-4 text-cyan-400 shrink-0" />
               <span>
-                Minimum 3 points required. PostGIS will automatically compute exact area in Hectares.
+                Minimum 3 points required. PostGIS will automatically compute exact area in
+                Hectares.
               </span>
             </div>
             <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 shrink-0">
               <Calculator className="w-4 h-4" />
-              <span>{points.length >= 3 ? `~${estimateAreaHa()} Ha (Estimated)` : 'Draw Polygon'}</span>
+              <span>
+                {points.length >= 3 ? `~${estimateAreaHa()} Ha (Estimated)` : 'Draw Polygon'}
+              </span>
             </div>
           </div>
 
-          {error && <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs rounded-xl">{error}</div>}
+          {error && (
+            <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs rounded-xl">
+              {error}
+            </div>
+          )}
 
           <div className="flex justify-end gap-3 pt-2 border-t border-slate-800">
             <button type="button" onClick={onClose} className="btn-secondary text-xs">
               Cancel
             </button>
-            <button type="submit" disabled={loading || points.length < 3} className="btn-primary text-xs">
+            <button
+              type="submit"
+              disabled={loading || points.length < 3}
+              className="btn-primary text-xs"
+            >
               {loading ? 'Processing Spatial Polygon...' : 'Save Site & Generate Telemetry'}
             </button>
           </div>

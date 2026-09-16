@@ -58,19 +58,21 @@ export default function ProjectsPage() {
 
         {/* Project Type Filter Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto">
-          {['ALL', 'Reforestation', 'Blue Carbon', 'Peatland', 'Avoided Deforestation'].map((type) => (
-            <button
-              key={type}
-              onClick={() => setSelectedType(type)}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-all whitespace-nowrap ${
-                selectedType === type
-                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                  : 'bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-white'
-              }`}
-            >
-              {type}
-            </button>
-          ))}
+          {['ALL', 'Reforestation', 'Blue Carbon', 'Peatland', 'Avoided Deforestation'].map(
+            (type) => (
+              <button
+                key={type}
+                onClick={() => setSelectedType(type)}
+                className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-all whitespace-nowrap ${
+                  selectedType === type
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    : 'bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-white'
+                }`}
+              >
+                {type}
+              </button>
+            )
+          )}
         </div>
       </div>
 

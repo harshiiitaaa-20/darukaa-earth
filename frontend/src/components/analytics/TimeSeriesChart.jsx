@@ -105,7 +105,8 @@ export default function TimeSeriesChart({ metrics = [], timeframe, onTimeframeCh
         bodyFont: { family: 'Inter', size: 12 },
         padding: 10,
         callbacks: {
-          label: (context) => `${context.dataset.label}: ${context.parsed.y} ${selectedConfig.unit}`,
+          label: (context) =>
+            `${context.dataset.label}: ${context.parsed.y} ${selectedConfig.unit}`,
         },
       },
     },
@@ -129,7 +130,9 @@ export default function TimeSeriesChart({ metrics = [], timeframe, onTimeframeCh
           <span className="text-xs font-semibold text-emerald-400 uppercase tracking-widest">
             Multi-Year Telemetry
           </span>
-          <h3 className="font-display font-bold text-lg text-white">Environmental Performance Over Time</h3>
+          <h3 className="font-display font-bold text-lg text-white">
+            Environmental Performance Over Time
+          </h3>
         </div>
 
         {/* Timeframe Filter Buttons */}

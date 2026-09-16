@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.core.config import settings
-from app.core.database import engine, Base, SessionLocal
-from app.db.seed import seed_initial_demo_data
 
+from app.api.v1.analytics import router as analytics_router
 from app.api.v1.auth import router as auth_router
 from app.api.v1.projects import router as projects_router
 from app.api.v1.sites import router as sites_router
-from app.api.v1.analytics import router as analytics_router
+from app.core.config import settings
+from app.core.database import Base, SessionLocal, engine
+from app.db.seed import seed_initial_demo_data
 
 # Create DB Tables
 Base.metadata.create_all(bind=engine)

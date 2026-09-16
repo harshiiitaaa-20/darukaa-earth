@@ -50,8 +50,12 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated }
               <FolderPlus className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-display font-bold text-lg text-white">Create Environmental Project</h3>
-              <p className="text-xs text-slate-400">Register new project for carbon & biodiversity tracking</p>
+              <h3 className="font-display font-bold text-lg text-white">
+                Create Environmental Project
+              </h3>
+              <p className="text-xs text-slate-400">
+                Register new project for carbon & biodiversity tracking
+              </p>
             </div>
           </div>
           <button onClick={onClose} className="p-2 text-slate-400 hover:text-white rounded-lg">
@@ -61,7 +65,9 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated }
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Project Name *</label>
+            <label className="block text-xs font-semibold text-slate-300 mb-1">
+              Project Name *
+            </label>
             <input
               type="text"
               required
@@ -74,7 +80,9 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated }
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Project Type *</label>
+              <label className="block text-xs font-semibold text-slate-300 mb-1">
+                Project Type *
+              </label>
               <select
                 value={projectType}
                 onChange={(e) => setProjectType(e.target.value)}
@@ -88,7 +96,9 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated }
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Country / Region *</label>
+              <label className="block text-xs font-semibold text-slate-300 mb-1">
+                Country / Region *
+              </label>
               <input
                 type="text"
                 required
@@ -101,7 +111,9 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated }
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Target Carbon Offset (tCO2e)</label>
+            <label className="block text-xs font-semibold text-slate-300 mb-1">
+              Target Carbon Offset (tCO2e)
+            </label>
             <input
               type="number"
               step="1000"
@@ -122,7 +134,11 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated }
             />
           </div>
 
-          {error && <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs rounded-xl">{error}</div>}
+          {error && (
+            <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs rounded-xl">
+              {error}
+            </div>
+          )}
 
           <div className="flex justify-end gap-3 pt-3 border-t border-slate-800">
             <button type="button" onClick={onClose} className="btn-secondary text-xs">
