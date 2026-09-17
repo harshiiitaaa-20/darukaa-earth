@@ -228,10 +228,3 @@ The database auto-seeds on initial launch with demo projects in Costa Rica, Indo
 
 ---
 
-## 📄 Evaluator Repository Access Instructions
-
-If the repository is private, access has been granted to the hiring team:
-- `ankita.dasgupta@darukaa.com`
-- `harsh.kumar@darukaa.com`
-- `utkarsh.gauniyal@darukaa.com`
-- `guneet.mutreja@darukaa.com`
